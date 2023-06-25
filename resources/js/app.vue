@@ -1,5 +1,4 @@
 <template>
-<router-link>
-    123
-</router-link>
+<router-view>
+</router-view>
 </template>
