@@ -1,5 +1,3 @@
 <template>
-    <div>
-       detail
-    </div>
-    </template>
+  <div>detail</div>
+</template>

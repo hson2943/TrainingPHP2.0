@@ -1,0 +1,6 @@
+<template>
+    <div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="Name's Product" aria-label="Recipient's username" aria-describedby="button-addon2">
+  <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+</div>
+</template>
