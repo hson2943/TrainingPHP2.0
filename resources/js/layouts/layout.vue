@@ -1,7 +1,7 @@
 <template>
   <div>
     <main>
-      <Header />
+      <Header class="sticky-top" />
       <div class="container-fuild" >
         <div class="row g-0">
           <div class="col-2">

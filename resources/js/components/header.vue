@@ -1,7 +1,7 @@
 <template>
     <div>
        <header>
-         <nav class="navbar navbar-expand-lg " style="background-color: #00ade8;"  >
+         <nav class="navbar navbar-expand-lg" style="background-color: #00ade8;"  >
   <div class="container-fluid">
 <!-- Logo -->
     <img src="http://127.0.0.1:8000/storage/images/ncc.png" href="#" class="navbar-brand" style="height: auto; width: 7%;" alt="">
@@ -9,9 +9,9 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="#">Home</a>
+    <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
+      <div class="navbar-nav mx-5">
+        <a class="nav-link" aria-current="page" href="./">Home</a>
         <a class="nav-link" href="#">Manage Product</a>
       </div>
     </div>
@@ -30,3 +30,21 @@
        </header>
     </div>
     </template>
+    <style>
+
+
+.navbar-nav {
+    --bs-nav-link-color: #fff;
+    --bs-nav-link-hover-color: #fff;
+
+}
+.nav-link{
+  font-weight: 600;
+  font-size:1.2rem;
+}
+
+.btn{
+  border: none;
+}
+
+  </style>

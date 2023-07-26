@@ -1,7 +1,11 @@
 <template>
   <div class="container" style="background-color: #fff; border-radius: 10px">
     <!-- List product -->
-    <div class="row row-cols-md-3 gap-4 p-5">
+    <div class="row p-5 gy-4" style="display: flex; justify-content: space-around;">
+        <Product></Product>
+      <Product></Product>
+      <Product></Product>
+      <Product></Product>
       <Product></Product>
       <Product></Product>
       <Product></Product>
@@ -26,4 +30,5 @@
   </div>
 </template>
 <style>
+
 </style>

@@ -12,13 +12,13 @@ const admin = [{
         {
             path: 'update',
             name: 'update',
-            component: () => import('../pages/update.vue'),
+            component: () => import('../pages/detail.vue'),
 
         },
         {
             path: 'detail',
             name: 'detail',
-            component: () => import('../pages/detail.vue'),
+            component: () => import('../pages/update.vue'),
 
         }
         ,
