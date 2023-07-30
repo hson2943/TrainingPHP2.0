@@ -4,22 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Models\Product;
-use App\Service\ProductService;
+use App\Services\ProductService;
 
 class ProductController extends Controller
 {
 
-    protected $product_model;
+    protected $product_service;
 
-    public function __construct(Product $product_model)
+    public function __construct(ProductService $product_service)
     {
-        $this->product_model = $product_model;
+        $this->product_service = $product_service;
     }
-    public function get()
+    public function getProduct(Request $request)
     {
-        $users = DB::table('products')->get();
-        return $users;
+        $data_search = $request->all();
+        return  $this->product_service->getProduct($data_search);
     }
 }

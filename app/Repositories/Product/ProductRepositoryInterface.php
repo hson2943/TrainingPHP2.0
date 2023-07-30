@@ -4,5 +4,5 @@ namespace App\Repositories\Product;
 
 interface ProductRepositoryInterface
 {
-    public function get();
+    public function getProduct($data_search);
 }

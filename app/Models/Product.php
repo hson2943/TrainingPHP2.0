@@ -18,4 +18,15 @@ class Product extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function category()
+    {
+        return $this->BelongsTo(Category::class);
+    }
+
+    public function brand()
+    {
+        return $this->BelongsTo(Brand::class);
+    }
+
 }

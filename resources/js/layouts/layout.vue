@@ -27,7 +27,7 @@ return{
   async created() {
     const { product_list, getProductList } = ProductList();
     await getProductList();
-    console.log(product_list)
+    console.log(product_list+"hello")
   }
 }
 </script>
