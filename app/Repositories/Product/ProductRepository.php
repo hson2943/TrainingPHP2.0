@@ -1,22 +1,20 @@
-<?php
+namespace App\Repositories\Product;
 
-namespace App\Http\Controllers;
-
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\Product;
-use App\Service\ProductService;
+use App\Repositories\Product\ProductRepositoryInterface;
 
-class ProductController extends Controller
+class ProductRepository implements ProductRepositoryInterface
 {
-
     protected $product_model;
+    protected $limit;
+    protected $limit_relative;
 
     public function __construct(Product $product_model)
     {
         $this->product_model = $product_model;
     }
+
+
     public function get()
     {
         $users = DB::table('products')->get();
