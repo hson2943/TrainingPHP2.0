@@ -18,7 +18,7 @@ class BrandRepository implements BrandRepositoryInterface
      * 
      * @return Brand
      */
-    public function getAll()
+    public function get()
     {
         return $this->brand->all();
     }
