@@ -34,7 +34,7 @@ class ProductController extends Controller
     */
     public function store(Request $request)
     {
-        // $product = $request->all();
+        $product = $request->all();
         $product = $this->product_service->store( $request);
         return $this->getResponse(Response::HTTP_OK, Response::$statusTexts[Response::HTTP_OK], $product->toArray());
         

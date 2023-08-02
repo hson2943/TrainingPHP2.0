@@ -11,6 +11,9 @@ use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Repositories\Gallery\GalleryRepository;
 use App\Repositories\Gallery\GalleryRepositoryInterface;
+use App\Repositories\Category_Brand\Category_BrandRepository;
+use App\Repositories\Category_Brand\Category_BrandRepositoryInterface;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -22,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(BrandRepositoryInterface::class, BrandRepository::class);
         $this->app->bind(CategoryRepositoryInterface::class, CategoryRepository::class);
         $this->app->bind(GalleryRepositoryInterface::class, GalleryRepository::class);
+        $this->app->bind(Category_BrandRepositoryInterface::class, Category_BrandRepository::class);
     }
 
     /**
