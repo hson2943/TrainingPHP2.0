@@ -22,11 +22,7 @@
         data-bs-parent="#accordionParent"
       >
         <ul class="list-group list-group-flush">
-          <li class="list-group-item list-group-item-action"> An item</li>
-          <li class="list-group-item list-group-item-action">A second item</li>
-          <li class="list-group-item list-group-item-action">A third item</li>
-          <li class="list-group-item list-group-item-action">A fourth item</li>
-          <li class="list-group-item list-group-item-action">And a fifth one</li>
+          <li v-for="category in model.category_list" :key="category.id" class="list-group-item list-group-item-action"> {{category.name}}</li>
         </ul>
       </div>
     </div>
@@ -66,15 +62,22 @@
 </template>
 
 <script>
-
-
+import CategoryList from "../Axios/categoryAxios";
 export default {
   data() {
     return {
+      model:{
+        category_list:[],
+        brand_list:[]
+      }
+
     };
   },
-  methods: {
-  },
+  async created() {
+    const { category_list, getCategoryList } = CategoryList();
+    await getCategoryList();
+    this.model.category_list= category_list;
+  }
 };
 </script>
 
@@ -92,7 +95,7 @@ export default {
   --bs-list-group-action-active-bg: #e6f7ff;
   --bs-list-group-action-hover-color:#00ade8;
   --bs-list-group-action-hover-bg: #e6f7ff;
-  --bs-list-group-border-width: 0.4rem;
+  --bs-list-group-border-width: 0.2rem;
   --bs-border-color: #00ade8;
 }
 

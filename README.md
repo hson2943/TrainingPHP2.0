@@ -15,4 +15,4 @@ boostrap
 jquery
 php
 
-install php,laravel,node -> embed vuejs into blade file ->routing page-> css -> test connection of database to app->
+install php,laravel,node -> embed vuejs into blade file ->routing page-> css -> test connection of database to app-> create all api ->
