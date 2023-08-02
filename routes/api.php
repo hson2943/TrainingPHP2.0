@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Category_BrandController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,5 +25,5 @@ Route::get('product/relativeProducts/{id}', [ProductController::class, 'getRelat
 Route::put('update/{product_id}', [ProductController::class,'update']);
 Route::post('store', [ProductController::class,'store']);
 
-Route::get('/brand', [BrandController::class, 'get']);
+Route::get('/brandByCate/{category_id}', [Category_BrandController::class, 'getBrandByCate']);
 Route::get('/category', [CategoryController::class, 'getCategoryList']);
