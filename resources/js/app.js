@@ -3,6 +3,7 @@ require('./bootstrap');
 import './bootstrap';
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
+import { Table, Menu, List, Button, Card, Skeleton, } from 'ant-design-vue';
 
 import { createApp } from 'vue';
 
@@ -33,8 +34,6 @@ library.add(fas)
 
 const app = createApp(App);
 
-app.use(router);
-
 app.component('Sidebar', Sidebar);
 app.component('Header', Header);
 app.component('SearchBar', SearchBar);
@@ -44,6 +43,9 @@ app.component('Pagination',Pagination);
 app.component('DetailForm',DetailForm);
 app.component('font-awesome-icon', FontAwesomeIcon);
 
+app.use(Menu);
+
+app.use(router);
 //turn off warning in tool browser
 app.config.warnHandler = () => {};
 

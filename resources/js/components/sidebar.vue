@@ -1,120 +1,104 @@
 <template>
-  <div class="accordion" id="accordionParent" style="font-weight: 600">
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingOne">
-        <button
-          class="accordion-button"
-          id="tabOne"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#collapseOne"
-          aria-controls="collapseOne"
-          aria-expanded="false"
-        >
-          Types
-        </button>
-      </h2>
-      <!-- SubItem Types-->
-      <div
-        id="collapseOne"
-        class="accordion-collapse collapse"
-        aria-labelledby="headingOne"
-        data-bs-parent="#accordionParent"
+  <a-menu
+    class="a-menu-custome"
+    v-model:selectedKeys="selectedKeys1"
+    v-model:openKeys="openKeys"
+    mode="inline"
+    :style="{ borderRight: 0 }"
+  >
+    <a-sub-menu key="sub1">
+      <template #title>
+        <span> Categories </span>
+      </template>
+      <a-menu-item :key="0" v-on:click="showBrandByCate(0)"> All</a-menu-item>
+      <a-menu-item
+        v-for="category in model.category_list"
+        :key="category.id"
+        v-on:click="showBrandByCate(category.id)"
+        >{{ category.name }}</a-menu-item
       >
-        <ul class="list-group list-group-flush">
-          <li
-            v-for="category in model.category_list"
-            :key="category.id"
-            class="list-group-item list-group-item-action"
-            v-on:click="showBrandByCate(category.id)"
-          >
-            {{ category.name }}
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="headingTwo">
-        <button
-          class="accordion-button"
-          id="tabTwo"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#collapseTwo"
-          aria-controls="collapseTwo"
-          aria-expanded="false"
-        >
-          Brands
-        </button>
-      </h2>
-      <!-- SubItem Brands -->
-      <div
-        id="collapseTwo"
-        class="accordion-collapse collapse"
-        aria-labelledby="headingTwo"
-        data-bs-parent="#accordionParent"
+    </a-sub-menu>
+  </a-menu>
+  <a-menu
+    class="a-menu-custome"
+    v-model:selectedKeys="selectedKeys1"
+    v-model:openKeys="openKeys"
+    mode="inline"
+    :style="{ height: '100%', borderRight: 0 }"
+  >
+    <a-sub-menu key="sub2">
+      <template #title>
+        <span> Brands </span>
+      </template>
+      <a-menu-item :key="0" v-on:click="saveBrand(0)"> All</a-menu-item>
+      <a-menu-item
+        v-for="brand in model.brand_list"
+        :key="brand.id"
+        v-on:click="saveBrand(brand.brand.id)"
       >
-        <ul class="list-group list-group-flush">
-          <li
-            v-for="brand in model.brand_list"
-            :key="brand.id"
-            class="list-group-item list-group-item-action"
-          >
-            {{ brand.brand.name }}
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
+        {{ brand.brand.name }}</a-menu-item
+      >
+    </a-sub-menu>
+  </a-menu>
 </template>
 
 <script>
 import CategoryList from "../Axios/categoryAxios";
 import BrandList from "../Axios/brandAxios";
+
 export default {
   data() {
     return {
+      state: {
+        category_id: 0,
+        brand_id: 0,
+      },
       model: {
         category_list: [],
         brand_list: [],
       },
     };
   },
+  //get category_list from axios
   async created() {
     const { category_list, getCategoryList } = CategoryList();
     await getCategoryList();
     this.model.category_list = category_list;
   },
+
   methods: {
+    //get brand_list relate to category from axios Onclick
     async showBrandByCate(category_id) {
       const { brand_list, getBrandList } = BrandList();
       await getBrandList(category_id);
       this.model.brand_list = brand_list;
+      //save state of category id
+      this.state.category_id = category_id;
+      this.$router.push(
+        `/?category_id=${category_id}&&/?brand_id=${this.state.brand_id}`
+      );
+    },
+    saveBrand(brand_id) {
+      //save state of brand id
+      this.state.brand_id = brand_id;
+      this.$router.push(
+        `/?category_id=${this.state.category_id}&&/?brand_id=${brand_id}`
+      );
     },
   },
 };
 </script>
 
 <style>
-.accordion {
-  --bs-primary-bg-subtle: #fff;
-  --bs-accordion-btn-icon: url(http://127.0.0.1:8000/storage/images/chevron-down-solid.png);
-  --bs-accordion-btn-active-icon: url(http://127.0.0.1:8000/storage/images/chevron-down-solid.png);
-  --bs-accordion-btn-icon-width: 0.8rem;
-  --bs-accordion-inner-border-radius: 0px;
-  --bs-border-radius: 0px;
+:where(.css-dev-only-do-not-override-eq3tly).ant-menu .ant-menu-item,
+:where(.css-dev-only-do-not-override-eq3tly).ant-menu .ant-menu-submenu,
+:where(.css-dev-only-do-not-override-eq3tly).ant-menu .ant-menu-submenu-title {
+  border-radius: 0px;
 }
+</style>
 
-.list-group {
-  --bs-list-group-action-active-bg: #e6f7ff;
-  --bs-list-group-action-hover-color: #00ade8;
-  --bs-list-group-action-hover-bg: #e6f7ff;
-  --bs-list-group-border-width: 0.2rem;
-  --bs-border-color: #00ade8;
-}
-
-.accordion-button {
-  font-size: 1rem;
-  font-weight: 500;
+<style scoped>
+.a-menu-custome {
+  font-weight: 600;
 }
 </style>
