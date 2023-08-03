@@ -22,6 +22,6 @@ class Category_BrandRepository implements Category_BrandRepositoryInterface
     */
     public function getBrandByCate($category_id)
     {
-        return $this->cate_brand->where('category_id', $category_id)->with('brand')->get();
+        return $this->cate_brand->orderBy('id', 'desc')->where('category_id', $category_id)->with('brand')->get();
     }
 }
