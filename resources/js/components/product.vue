@@ -1,8 +1,8 @@
 <template>
      <div class="card shadow" style="width: 31%;">
-  <img src="https://carwow-uk-wp-3.imgix.net/18015-MC20BluInfinito-scaled-e1666008987698.jpg" class="img-fluid pt-2 rounded" style="width: 100%;" alt="">
+  <img :src="product.thumbnail" class="img-fluid pt-2 rounded" style="width: 100%;" alt="">
   <div class="card-body">
-    <h5 class="card-title">Card title</h5>
+    <h5 class="card-title">{{ product.name }}</h5>
     <div class="container overflow-hidden">
   <div class="row ">
     <div class="col">
@@ -10,9 +10,17 @@
     </div>
     <div class="col">
       <a href="#" class="btn btn-primary w-100">Delete </a>
+
     </div>
   </div>
 </div>
   </div>
 </div>
 </template>
+<script>
+export default {
+  props: {
+product:Object,
+  },
+};
+</script>
