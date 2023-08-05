@@ -22,8 +22,6 @@ import ProductListAxios from "../Axios/productAxios";
 export default {
   data() {
     return {
-      category_id: this.$route.query.category_id,
-      brand_id: this.$route.query.brand_id,
       product_list: [],
     };
   },
@@ -33,7 +31,7 @@ export default {
   methods: {
     async getProduct(){
       const { product_list, getProductList } = ProductListAxios();
-     await getProductList(this. category_id,this.brand_id , "");
+     await getProductList(this.$route.query.category_id,this.$route.query.brand_id , "");
      this.product_list=product_list;
     }
   },
