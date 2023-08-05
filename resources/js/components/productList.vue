@@ -27,20 +27,26 @@ export default {
       product_list: [],
     };
   },
-  async created() {
-    const { product_list, getProductList } = ProductListAxios();
-     await getProductList(0,0 , "");
-     this.product_list=product_list;
-     console.log(this.product_list);
+  created() {
+     this.getProduct();
   },
-  // computed: {
-  //   computedProductList() {
-  //     const { product_list, getProductList } = ProductListAxios();
-  //     getProductList(this.category_id, this.brand_id, "a");
-  //     console.log(product_list)
-  //     return product_list;
-  //   },
-  // },
+  methods: {
+    async getProduct(){
+      const { product_list, getProductList } = ProductListAxios();
+     await getProductList(this. category_id,this.brand_id , "");
+     this.product_list=product_list;
+    }
+  },
+  watch:{
+    '$route.query.category_id': function(newCategoryId) {
+      this.category_id= newCategoryId;
+      this.getProduct();
+  },
+  '$route.query.brand_id': function(newBrandId) {
+    this.brand_id= newBrandId;
+    this.getProduct();
+  }
+  }
 };
 </script>
 <style>
