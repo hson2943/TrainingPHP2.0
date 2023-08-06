@@ -2,7 +2,7 @@
   <a-menu
     class="a-menu-custome"
     v-model:selectedKeys="selectedKeys1"
-    v-model:openKeys="openKeys"
+    v-model:openKeys="openKeys1"
     mode="inline"
     :style="{ borderRight: 0 }"
   >
@@ -10,11 +10,11 @@
       <template #title>
         <span> Categories </span>
       </template>
-      <a-menu-item :key="0" v-on:click="showBrandByCate(0)"> All</a-menu-item>
+      <a-menu-item :key="0" @click=" clickCategory(0)"> All</a-menu-item>
       <a-menu-item
         v-for="category in model.category_list"
         :key="category.id"
-        v-on:click="showBrandByCate(category.id)"
+        @click=" clickCategory(category.id)"
         >{{ category.name }}</a-menu-item
       >
     </a-sub-menu>
@@ -22,7 +22,7 @@
   <a-menu
     class="a-menu-custome"
     v-model:selectedKeys="selectedKeys2"
-    v-model:openKeys="openKeys"
+    v-model:openKeys="openKeys2"
     mode="inline"
     :style="{ height: '100%', borderRight: 0 }"
   >
@@ -30,13 +30,13 @@
       <template #title>
         <span> Brands </span>
       </template>
-      <a-menu-item :key="0" v-on:click="saveBrand(0)"> All</a-menu-item>
+      <a-menu-item :key="0" @click="clickBrand(0)"> All</a-menu-item>
       <a-menu-item
-        v-for="brand in model.brand_list"
-        :key="brand.id"
-        v-on:click="saveBrand(brand.brand.id)"
+        v-for="brand_category in model.brand_list"
+        :key="brand_category.brand.id"
+        @click="clickBrand(brand_category.brand.id)"
       >
-        {{ brand.brand.name }}</a-menu-item
+        {{ brand_category.brand.name }}</a-menu-item
       >
     </a-sub-menu>
   </a-menu>
@@ -49,13 +49,13 @@ import BrandListAxios from "../Axios/brandAxios";
 export default {
   data() {
     return {
+      //make button select according url when refresh
       selectedKeys1: [parseInt(this.$route.query.category_id)],
       selectedKeys2: [parseInt(this.$route.query.brand_id)],
-      openKeys: ["sub1"],
-      state: {
-        category_id: 0,
-        brand_id: 0,
-      },
+
+      openKeys1: ["sub1"],
+      openKeys2: ["sub2"],
+
       model: {
         category_list: [],
         brand_list: [],
@@ -64,6 +64,8 @@ export default {
   },
   created() {
     this.getCategoryList();
+    this.getBrandByCate(this.$route.query.category_id);
+    console.log(parseInt(this.$route.query.brand_id));
   },
   methods: {
     //get category_list from axios
@@ -73,22 +75,27 @@ export default {
       this.model.category_list = category_list;
     },
     //get brand_list are relation with category from axios Onclick
-    async showBrandByCate(category_id) {
+    async getBrandByCate(category_id) {
+      //get brand_list by axios
       const { brand_list, getBrandList } = BrandListAxios();
       await getBrandList(category_id);
       this.model.brand_list = brand_list;
-      //save state of category id
-      this.state.category_id = category_id;
+    },
+    clickCategory(category_id) {
       this.$router.push(`/?category_id=${category_id}&brand_id=0 `);
     },
-    saveBrand(brand_id) {
-      //save state of brand id
-      this.state.brand_id = brand_id;
+    //ERROR category_id url change when i click brand
+    clickBrand(brand_id) {
       this.$router.push(
-        `/?category_id=${this.state.category_id}&brand_id=${brand_id}`
+        `/?category_id=${this.$route.query.category_id}&brand_id=${brand_id}`
       );
     },
   },
+  watch:{
+    '$route.query.category_id': function(newCategoryId) {
+      this.getBrandByCate(newCategoryId);
+  },
+  }
 };
 </script>
 
