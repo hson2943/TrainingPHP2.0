@@ -8,12 +8,11 @@ export default function getDataProduct() {
   const getProductList = async (category_id, brand_id, key) => {
 
     var form = new FormData();
-    // form.append("key", key ? key : null);
-    // form.append("category_id", category_id ? category_id : null);
-    // form.append("brand_id", brand_id ? brand_id : null);
-    form.append("key", key );
-    form.append("category_id", category_id );
-    form.append("brand_id", brand_id );
+    //brand_id, cate_id=0 key="" when go to default url
+    form.append("key", key ? key : "");
+    form.append("category_id", category_id ? category_id : 0);
+    form.append("brand_id", brand_id ? brand_id : 0);
+
     axios({
       method: "post",
       url: api,
