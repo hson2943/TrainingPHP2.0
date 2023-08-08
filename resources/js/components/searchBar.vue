@@ -23,7 +23,7 @@ export default{
       if (!regex.test(key)) {
         event.preventDefault();
       }
-      this.$router.push(`/?category_id=${this.$route.query.category_id}&brand_id=${this.$route.query.brand_id}&key=${this.keyword}`);
+      this.$router.push(`/?category_id=${this.$route.query.category_id}&brand_id=${this.$route.query.brand_id}&key=${this.keyword}&page=${current}`);
     },
   },
 }

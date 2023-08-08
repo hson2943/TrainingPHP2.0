@@ -1,7 +1,7 @@
 import './bootstrap';
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
-import { Table, Menu, Spin, Button, Card, Skeleton, } from 'ant-design-vue';
+import { Pagination, Menu, Spin, Button, Card, Skeleton, } from 'ant-design-vue';
 
 import { createApp } from 'vue';
 
@@ -13,7 +13,6 @@ import Header from "./components/header.vue";
 import SearchBar from "./components/searchBar";
 import ProductList from "./components/productList";
 import Product from "./components/product";
-import Pagination from "./components/pagination";
 import DetailForm from "./components/detailForm";
 import router from "./router/index.js"
 
@@ -37,12 +36,12 @@ app.component('Header', Header);
 app.component('SearchBar', SearchBar);
 app.component('ProductList', ProductList);
 app.component('Product', Product);
-app.component('Pagination',Pagination);
 app.component('DetailForm',DetailForm);
 app.component('font-awesome-icon', FontAwesomeIcon);
 
 app.use(Menu);
 app.use(Spin);
+app.use(Pagination);
 
 app.use(router);
 //turn off warning in tool browser

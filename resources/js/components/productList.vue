@@ -12,7 +12,7 @@
     <div class="row pb-5 pt-1">
       <div class="col-4"></div>
       <div class="col-4">
-        <pagination></pagination>
+        <a-pagination v-model:current="this.$route.query.page" :total="product_last_page*10" show-less-items @change="changePage"/>
       </div>
       <div class="col-4"></div>
     </div>
@@ -26,30 +26,46 @@ export default {
     return {
       product_list: [],
       loading:false,
+      product_last_page: 0,
     };
   },
   created() {
      this.getProduct();
-     this.getProduct=_.debounce(this.getProduct, 2000)
+     this.getProduct=_.debounce(this.getProduct, 1500)
   },
   methods: {
     async getProduct(){
-      const { product_list, getProductList } = ProductListAxios();
+      // NEED IMPROVE
+      if(this.$route.query.category_id =="undefined" || this.$route.query.category_id ==undefined) this.$route.query.category_id ="0"
+      if(this.$route.query.brand_id =="undefined" || this.$route.query.brand_id ==undefined) this.$route.query.brand_id ="0"
+      if(this.$route.query.key =="undefined" || this.$route.query.key ==undefined) this.$route.query.key =""
+
+      const { product_list,product_last_page, getProductList } = ProductListAxios();
      await getProductList(this.$route.query.category_id,this.$route.query.brand_id ,this.$route.query.key,this.$route.query.page);
      this.product_list=product_list;
+     this.product_last_page=product_last_page;
+    console.log( this.product_list);
       this.loading=false;
     },
+    changePage(current){
+      console.log(current)
+      this.$router.push(`/?category_id=${this.$route.query.category_id}&brand_id=${this.$route.query.brand_id}&key=${this.key}&page=${current}`);
+    }
   },
   watch:{
-    '$route.query.category_id': function(newCategoryId) {
+    '$route.query.category_id': function() {
       this.getProduct();
       this.loading=true;
   },
-  '$route.query.brand_id': function(newBrandId) {
+  '$route.query.brand_id': function() {
     this.getProduct();
     this.loading=true;
   },
-  '$route.query.key': function(newKey) {
+  '$route.query.key': function() {
+    this.getProduct();
+    this.loading=true;
+  },
+  '$route.query.page': function() {
     this.getProduct();
     this.loading=true;
   }
