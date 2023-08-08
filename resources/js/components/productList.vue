@@ -5,7 +5,8 @@
       class="row p-5 gy-4"
       style="display: flex; justify-content: space-around"
     >
-      <Product v-for="product in product_list" :key="product.id" :product="product"></Product>
+    <a-spin v-if="loading" size="large" />
+      <Product v-else v-for="product in product_list" :key="product.id" :product="product"></Product>
     </div>
     <!-- Pagination -->
     <div class="row pb-5 pt-1">
@@ -24,27 +25,33 @@ export default {
   data() {
     return {
       product_list: [],
+      loading:false,
     };
   },
   created() {
      this.getProduct();
-     this.getProduct=_.debounce(this.getProduct, 1000)
+     this.getProduct=_.debounce(this.getProduct, 2000)
   },
   methods: {
     async getProduct(){
       const { product_list, getProductList } = ProductListAxios();
-     await getProductList(this.$route.query.category_id,this.$route.query.brand_id , "");
+     await getProductList(this.$route.query.category_id,this.$route.query.brand_id ,this.$route.query.key);
      this.product_list=product_list;
+      this.loading=false;
     },
   },
   watch:{
     '$route.query.category_id': function(newCategoryId) {
-      this.category_id= newCategoryId;
       this.getProduct();
+      this.loading=true;
   },
   '$route.query.brand_id': function(newBrandId) {
-    this.brand_id= newBrandId;
     this.getProduct();
+    this.loading=true;
+  },
+  '$route.query.key': function(newKey) {
+    this.getProduct();
+    this.loading=true;
   }
   }
 };

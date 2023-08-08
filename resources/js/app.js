@@ -1,7 +1,7 @@
 import './bootstrap';
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
-import { Table, Menu, List, Button, Card, Skeleton, } from 'ant-design-vue';
+import { Table, Menu, Spin, Button, Card, Skeleton, } from 'ant-design-vue';
 
 import { createApp } from 'vue';
 
@@ -42,6 +42,7 @@ app.component('DetailForm',DetailForm);
 app.component('font-awesome-icon', FontAwesomeIcon);
 
 app.use(Menu);
+app.use(Spin);
 
 app.use(router);
 //turn off warning in tool browser
