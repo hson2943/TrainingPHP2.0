@@ -35,7 +35,7 @@ export default {
   methods: {
     async getProduct(){
       const { product_list, getProductList } = ProductListAxios();
-     await getProductList(this.$route.query.category_id,this.$route.query.brand_id ,this.$route.query.key);
+     await getProductList(this.$route.query.category_id,this.$route.query.brand_id ,this.$route.query.key,this.$route.query.page);
      this.product_list=product_list;
       this.loading=false;
     },
