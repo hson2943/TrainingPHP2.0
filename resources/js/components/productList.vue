@@ -18,6 +18,7 @@
   </div>
 </template>
 <script>
+import _ from 'lodash';
 import ProductListAxios from "../Axios/productAxios";
 export default {
   data() {
@@ -27,13 +28,14 @@ export default {
   },
   created() {
      this.getProduct();
+     this.getProduct=_.debounce(this.getProduct, 1000)
   },
   methods: {
     async getProduct(){
       const { product_list, getProductList } = ProductListAxios();
      await getProductList(this.$route.query.category_id,this.$route.query.brand_id , "");
      this.product_list=product_list;
-    }
+    },
   },
   watch:{
     '$route.query.category_id': function(newCategoryId) {

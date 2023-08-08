@@ -12,22 +12,21 @@ export default function getDataProduct() {
     form.append("key", key ? key : "");
     form.append("category_id", category_id ? category_id : 0);
     form.append("brand_id", brand_id ? brand_id : 0);
-
-    axios({
-      method: "post",
-      url: api,
-      data: form,
-      headers: { "Content-Type": "multipart/form-data" },
-    })
-      .then(function (response) {
-        //handle success
-        product_list.value = response.data.data.data;
-        console.log(product_list.value);
+      axios({
+        method: "post",
+        url: api,
+        data: form,
+        headers: { "Content-Type": "multipart/form-data" },
       })
-      .catch(function (response) {
-        //handle error
-        console.log(response);
-      });
+        .then(function (response) {
+          //handle success
+          product_list.value = response.data.data.data;
+          console.log(product_list.value);
+        })
+        .catch(function (response) {
+          //handle error
+          console.log(response);
+        });
   }
   return {
     product_list,
