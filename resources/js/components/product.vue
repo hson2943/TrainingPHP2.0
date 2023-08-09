@@ -6,7 +6,7 @@
     <div class="container overflow-hidden">
   <div class="row ">
     <div class="col">
-      <a href="./update" class="btn btn-primary w-100">Edit </a>
+      <a class="btn btn-primary w-100" @click="goToUpdate(product.id)">Edit </a>
     </div>
     <div class="col">
       <a href="#" class="btn btn-primary w-100">Delete </a>
@@ -18,9 +18,15 @@
 </div>
 </template>
 <script>
+
 export default {
   props: {
 product:Object,
   },
+  methods:{
+    goToUpdate(product_id){
+      this.$router.push({ name: "update", params: { id: product_id } });
+    },
+  }
 };
 </script>

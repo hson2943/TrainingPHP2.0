@@ -10,7 +10,7 @@ const admin = [{
             component: () => import('../pages/index.vue'),
         },
         {
-            path: 'update',
+            path: 'update/:id',
             name: 'update',
             component: () => import('../pages/detail.vue'),
 
@@ -18,7 +18,7 @@ const admin = [{
         {
             path: 'detail',
             name: 'detail',
-            component: () => import('../pages/update.vue'),
+            // component: () => import('../pages/update.vue'),
 
         }
         ,

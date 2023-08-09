@@ -8,32 +8,29 @@
         <div class="col-md-6 col-12">
           <div class="col mb-1">Product Information</div>
           <div class="col mb-1">
-            <label for="formGroupExampleInput" class="form-label"
-              >Name</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="formGroupExampleInput"
-              placeholder="Example input placeholder"
-            />
+           <input-tag :modelValue="model.name" inputType="name"/>
           </div>
           <div class="col mb-1">
             <label for="formGroupExampleInput" class="form-label"
-              >Type</label
+              >Category</label
             >
-            <input
+            <select             v-model="category_list"
               type="text"
               class="form-control"
               id="formGroupExampleInput"
-              placeholder="Example input placeholder"
-            />
+              placeholder="placeholder">
+              <option v-for="category in category_list" :key="category.id" :value="category.id">
+{{ category.name }}
+              </option>
+
+          </select>
           </div>
           <div class="col mb-1">
             <label for="formGroupExampleInput" class="form-label"
               >Brand</label
             >
-            <input
+            <select
+            v-model="brand_list"
               type="text"
               class="form-control"
               id="formGroupExampleInput"
@@ -41,21 +38,14 @@
             />
           </div>
           <div class="col mb-1">
-            <label for="formGroupExampleInput" class="form-label"
-              >Price</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="formGroupExampleInput"
-              placeholder="Example input placeholder"
-            />
+            <input-tag :modelValue="model.prices" inputType="price"/>
           </div>
           <div class="col mb-1">
             <label for="formGroupExampleInput" class="form-label"
               >Description</label
             >
             <textarea
+            v-model="model.description"
               class="form-control"
               aria-label="With textarea"
             ></textarea>
@@ -151,6 +141,52 @@
 
     </form>
 </template>
+<script>
+import ProductListAxios from "../Axios/productAxios";
+import CategoryListAxios from "../Axios/categoryAxios";
+import BrandListAxios from "../Axios/brandAxios";
+export default {
+data(){
+  return{
+model:{
+  id: "",
+  name: "",
+  prices:"",
+  category_id: "",
+  brand_id:"",
+  description:"",
+  // gallery:[order1="",order2="",order3="",order4=""],
+},
+category_list: [],
+        brand_list: [],
+  }
+},
+  created(){
+this.getProduct();
+this.getCategoryList();
+  },
+  methods:{
+    async getProduct(){
+      const { product, getProduct } = ProductListAxios();
+     await getProduct(this.$route.params.id);
+     this.model = product;
+    },
+    async getCategoryList() {
+      const { category_list, getCategoryList } = CategoryListAxios();
+      await getCategoryList();
+      this.category_list = category_list;
+    },
+    //get brand_list are relation with category from axios Onclick
+    async getBrandByCate(category_id) {
+      //get brand_list by axios
+      const { brand_list, getBrandList } = BrandListAxios();
+      await getBrandList(category_id);
+      this.brand_list = brand_list;
+    },
+  }
+}
+
+</script>
 <style scoped>
 .container{
   display: flex;

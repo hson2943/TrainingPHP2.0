@@ -16,6 +16,8 @@ import Product from "./components/product";
 import DetailForm from "./components/detailForm";
 import router from "./router/index.js"
 
+//Element
+import inputTag from './elements/inputTag.vue'
 
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -37,6 +39,7 @@ app.component('SearchBar', SearchBar);
 app.component('ProductList', ProductList);
 app.component('Product', Product);
 app.component('DetailForm',DetailForm);
+app.component('InputTag',inputTag);
 app.component('font-awesome-icon', FontAwesomeIcon);
 
 app.use(Menu);

@@ -25,5 +25,6 @@ Route::get('product/relativeProducts/{id}', [ProductController::class, 'getRelat
 Route::put('update/{product_id}', [ProductController::class,'update']);
 Route::post('store', [ProductController::class,'store']);
 
+Route::get('update/{id}', [ProductController::class, 'getByID']);
 Route::get('/brandByCate/{category_id}', [Category_BrandController::class, 'getBrandByCate']);
 Route::get('/category', [CategoryController::class, 'getCategoryList']);

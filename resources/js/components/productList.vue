@@ -21,6 +21,8 @@
 <script>
 import _ from 'lodash';
 import ProductListAxios from "../Axios/productAxios";
+import CategoryListAxios from "../Axios/categoryAxios";
+import BrandListAxios from "../Axios/brandAxios";
 export default {
   data() {
     return {
@@ -44,12 +46,12 @@ export default {
      await getProductList(this.$route.query.category_id,this.$route.query.brand_id ,this.$route.query.key,this.$route.query.page);
      this.product_list=product_list;
      this.product_last_page=product_last_page;
-    console.log( this.product_list);
+     //stop spin when load data is done
       this.loading=false;
     },
+    //event fire when change the page 
     changePage(current){
-      console.log(current)
-      this.$router.push(`/?category_id=${this.$route.query.category_id}&brand_id=${this.$route.query.brand_id}&key=${this.key}&page=${current}`);
+      this.$router.push(`/?category_id=${this.$route.query.category_id}&brand_id=${this.$route.query.brand_id}&key=${this.$route.query.key}&page=${current}`);
     }
   },
   watch:{
