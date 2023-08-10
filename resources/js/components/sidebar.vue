@@ -10,11 +10,11 @@
       <template #title>
         <span> Categories </span>
       </template>
-      <a-menu-item :key="0" @click=" clickCategory(0)"> All</a-menu-item>
+      <a-menu-item :key="0" @click="clickCategory(0)"> All</a-menu-item>
       <a-menu-item
         v-for="category in model.category_list"
         :key="category.id"
-        @click=" clickCategory(category.id)"
+        @click="clickCategory(category.id)"
         >{{ category.name }}</a-menu-item
       >
     </a-sub-menu>
@@ -91,11 +91,11 @@ export default {
       );
     },
   },
-  watch:{
-    '$route.query.category_id': function(newCategoryId) {
+  watch: {
+    "$route.query.category_id": function (newCategoryId) {
       this.getBrandByCate(newCategoryId);
+    },
   },
-  }
 };
 </script>
 
